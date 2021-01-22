@@ -13,18 +13,11 @@ import { DatePipe } from '@angular/common';
 import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
-import { ProveedoresComponent } from './proveedores/proveedores/proveedores.component';
-import { MarcasComponentComponent } from './marcas-component/marcas-component.component';
-import { MediosDePagoComponent } from './medios-de-pago/medios-de-pago.component';
-import { TipoOfertaComponent } from './tipo-oferta/tipo-oferta.component';
-import { EventoOfertaComponent } from './evento-oferta/evento-oferta.component';
-import { PuntoCompraComponent } from './punto-compra/punto-compra.component';
-import { PlazoCreditoComponent } from './plazo-credito/plazo-credito.component';
-import { TipoVentajaComponent } from './tipo-ventaja/tipo-ventaja.component';
+
 import { GestionDevolucionesComponent } from './gestion-devoluciones/gestion-devoluciones.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCardModule} from '@angular/material/card';
-import {MatTabsModule} from '@angular/material/tabs';
+import {MatTabsModule} from '@angular/material/tabs'; 
 import { AccesModuleComponent } from './acces-module/acces-module.component';
 
 
@@ -51,17 +44,10 @@ import { AccesModuleComponent } from './acces-module/acces-module.component';
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    ProveedoresComponent,
-    MarcasComponentComponent,
-    MediosDePagoComponent,
-    TipoOfertaComponent,
-    EventoOfertaComponent,
-    PuntoCompraComponent,
-    PlazoCreditoComponent,
-    TipoVentajaComponent,
+    
     GestionDevolucionesComponent,
     AccesModuleComponent
-
+ 
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
