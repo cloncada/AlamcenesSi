@@ -1,0 +1,61 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Gestión de Ofertas</h4>
+          </div>
+          <div class="card-body">
+              <div>
+                <a [routerLink]="['/add-oferta']" class="btn btn-md btn-success btn-outline"><span class="btn-label"><i class="now-ui-icons  ui-1_simple-add"></i></span> Nueva Oferta</a>
+              </div>
+            <div class="table-responsive">
+                <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+                    <thead class=" text-primary">
+                      <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>ID Motor</th>
+                        <th>Evento</th>
+                        <th>Fecha</th>
+                        <th>Estado</th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let post of posts">
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.nombreOferta }}</td>
+                        <td>{{ post.idOferta }}</td>
+                        <td>{{ post.eventoOferta.nombre }}</td>
+                        <td>{{ post.fechaInicio}} - {{ post.fechaFin }}</td>
+                        <td>{{ post.estatus }}</td>
+                        <td>
+                            <a class="btn btn-link btn-info" [routerLink]="['/process-ofert', post.id]" name="edit"><i class="now-ui-icons ui-1_settings-gear-63"></i></a>
+                            <a class="btn btn-link btn-info" [routerLink]="['/oferta-details', post.id]" name="view"><i class="now-ui-icons ui-1_zoom-bold"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+              </div>
+            </div>
+        </div>
+    </div>
+    <ng-template #mymodal let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Bootstrap Modal</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          This is example from ItSolutionStuff.com
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Ok</button>
+        </div>
+      </ng-template>
+</div>
+

@@ -1,0 +1,5 @@
+input[name='participacionAsumirNegocio'],
+input[name='participacionAsumirProveedor']{
+    width: 50%;
+    display: inline-block;
+}

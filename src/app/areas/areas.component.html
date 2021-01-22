@@ -1,0 +1,111 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header row">
+          <h4 class="card-title"> Administracion de devoluciones</h4>
+          <div>
+            
+            <button class="btn btn-danger" (click)="logout()">cerrar cesion  </button>
+               </div>
+          
+        </div>
+        <h4>User: {{user.userName}}</h4>
+        <h4>Roles:{{cad}}</h4>
+        <div class="card-body">
+         
+          <div class="table-responsive">
+            <table class="table" datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger">
+              <thead class=" text-primary">
+                <tr>
+                  <th>
+                    ID Orden
+                </th>
+                <th>
+                    Fecha
+                </th>
+                <th>
+                    Nombre
+                </th>
+                <th>
+                  Email
+                </th>
+                <th>
+                  Tipo Registro
+              </th>
+              <th>
+                  Estado
+              </th>
+              <th>
+                  Items
+              </th>
+              <th>
+                Accion
+            </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let product of posts">
+                  <td>{{ product.id }}</td>
+                  <td>{{ product.date }}</td>
+                  <td>{{ product.saleDto.firstName }} {{ product.saleDto.lastName }} </td>  
+                  <td>{{ product.saleDto.email }}  </td>                                 
+          
+                                    
+                  <td  ><p >{{product.type}}</p></td>
+                  
+            
+
+                     
+
+                  
+                  <td><p >{{product.status}}</p></td>
+
+                 
+
+                  <td>{{ product.items.length }}</td>
+                  <td>
+                      <button type="button" href="/oferta-info" class="btn btn-link btn-info" (click)="pasarProducto(product)" name="edit"  >
+                       Gestionar
+                      </button>
+                    </td>
+
+
+
+              </tbody>
+            </table>
+          </div>
+
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Colores</th>
+                
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="aprobada" > Orden Aprobada </td>
+                <td class="cancelado"> Orden Cancelada</td>
+                <td class="finalizada">Orden Finalizada</td>
+                <td class="creada">Orden Creada</td>
+              </tr>
+              <tr>
+                <td class="recibido">Producto Recibido</td>
+                <td class="novedad">Producto con novedad</td>
+                <td class="espera">Producto en espera</td>
+               
+              </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+   
+   
+    
+  </div>

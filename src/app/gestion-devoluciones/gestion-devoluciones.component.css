@@ -1,0 +1,36 @@
+div{
+    padding: 5px;
+    
+    
+    }
+    .consecutivo{
+    width: 20%;
+    
+    }
+    .fecha{
+    
+        width: 20%;
+    
+    }
+    .example-card {
+        max-width: 400px;
+      }
+    .img{
+    height: 100px;
+    
+    
+      }
+      .imagen{
+        border: solid 1px;
+        width: 700px;
+    margin: 0px;
+    
+    
+      }
+      .opciones{
+    width: 200px;
+      }
+      .botones{
+
+        float: right;
+      }

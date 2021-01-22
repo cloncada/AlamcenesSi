@@ -1,0 +1,313 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header row">
+          <h3 class="card-title"> Administracion de devoluciones</h3>
+          <div class="botones">
+
+                
+            <button class="btn btn-primary" (click)="tabla()">Tabla</button>
+            <button class="btn btn-danger" (click)="logout()">Cerrar cesion  </button>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="col-md-12">
+                <div class="card">
+                    <!-- #docregion align-start -->
+                    
+                        <!-- #enddocregion align-start -->
+                       
+                            <div class="card">
+                                <div class="row no-gutters">
+                                    <div>
+                                        <h6><b> ID orden:</b></h6>
+                                    </div>
+                                    <div class="col-2"><h6>{{ producto.orderId }}</h6></div>
+
+                                    <div>
+                                        <h6><b> Fecha de Orden:</b></h6>
+                                    </div>
+                                    <div class="col-2"><h6>{{ producto.date}}</h6></div>
+                                    <div>
+                                        <h6><b> Dias Transcurridos:</b></h6>
+                                    </div>
+                                    <div class="col-2"><h6>{{diasTranscurridos}}</h6></div>
+                                   
+                                </div>
+                                <div class="row no-gutters">
+                                <div>
+                                    <h6><b> Tipo Registro:</b></h6>
+                                </div>
+                         
+                                <div class="col-2" *ngIf="producto.type==='PDV'"><h6>PUNTO DE VENTA </h6></div>
+                                <div class="col-2" *ngIf="producto.type==='COOR'"><h6>COORDINADORA </h6></div>
+                                <div class="col-2" *ngIf="producto.type==='RGC'"><h6>RECOGIDA </h6></div>
+                                 </div>
+                                <div class="row no-gutters">
+                                    <div>
+                                        <p><b> Tipo</b></p>
+                                    </div>
+                                    <div class="col-2"  *ngIf="producto.form==='1'">Vale electronico </div>
+                                    
+                                    <div>
+                                        <p><b> Estado:</b></p>
+                                    </div>
+                                    <div class="col-2">{{producto.status}}</div>
+                                    
+                                    
+
+                                </div>
+                               
+                                <div class="row no-gutters">
+                                    <div>
+                                        <p><b> No Factura:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.trackingNumber }} </div>
+
+                                    <div>
+                                        <p><b> Fecha de Compra:</b></p>
+                                    </div>
+                                    <div class="col-2">{{producto.saleDto.date}}</div>
+                                    
+                                    
+
+                                </div>
+                                <div class="row no-gutters">
+                                    <div>
+                                        <p><b> Tipo de documento:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.typeDocument }} </div>
+                                    <div>
+                                        <p><b> Numero de Documento:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.document }} </div>
+
+                                    <div>
+                                        <p><b> Nombre:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.firstName }} {{ producto.saleDto.lastName }}     </div>
+
+
+                                </div>
+                                <div class="row no-gutters">
+                                    
+                                    <div>
+                                        <p><b> Telefono:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.phone }} </div>
+                                    <div>
+                                        <p><b> Email:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.email }} </div>
+                                    
+                                    
+                                </div>
+
+                                <div class="row no-gutters">
+                                    <div>
+                                        <p><b> Codigo Postal:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.postalCode }}  </div>
+
+                                    <div>
+                                        <p><b> Departamento:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.state }}  </div>
+                                    <div>
+                                        <p><b> Ciudad:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.city }}  </div>
+                                    <div>
+                                        <p><b> Direccion:</b></p>
+                                    </div>
+                                    <div class="col-2">{{ producto.saleDto.street }}  </div>
+
+
+
+                                </div>
+                                
+
+                                <div class="row no-gutters">
+                                <div>
+                                    <p><b> Fecha de Compra:</b></p>
+                                </div>
+                                <div class="col-2">{{producto.saleDto.date}} </div>
+                                <div>
+                                    <p><b>Dias:</b></p>
+                                </div>
+                                <div class="col-2">{{diasTranscurridos}} </div>
+                                </div>  
+
+
+                               
+                              
+                               
+                               
+                                
+                                <div class="row no-gutters">
+                                    <div>
+                                        <p><b> Última observacion:</b></p>
+                                    </div>
+                                    <div class="col-2">{{producto.observation}} </div>
+                                </div>
+
+                                <!-- 
+                                <div class="row no-gutters">
+
+                                    <div class="col-2"><b> Contactar con:</b> </div>
+                                    <div>
+                                        <p><b> Nombre:</b></p>
+                                    </div>
+                                    <div class="col-2">nombre</div>
+                                    <div>
+                                        <p><b> Telefono:</b></p>
+                                    </div>
+                                    <div class="col-2">telefono </div>
+                                </div>-->
+  
+                            </div>
+                            <div *ngFor="let item of items; let i = index">
+                                <div class="row imagen" >
+                                    <div class="col-2 ">
+                                        <img class="img" [src]="item.image"/>
+
+                                    </div>
+                                    <div class="col-8">
+                                        <div>
+                                            <p><b> Referencia #:</b> {{item.refId}}</p>
+                                        </div>
+                                        <div>
+                                            <p><b> Descripcion:</b> {{item.name}}</p>
+                                        </div>
+                                        <div>
+                                            <p><b> Cantidad a Devolver:</b> {{item.quantitySelected}}</p>
+                                        </div>
+                                        <div>
+                                           
+                                        </div>
+
+                                    </div>
+                                    <form #myForm="ngForm" (ngSubmit)="onEdit()">
+                                               
+                                   
+                                        <div class="form-group" *ngIf="analist">
+                                          <label for="exampleInputPassword1">Estado</label>
+                              
+                                          <select required class="form-control" ngModel name="estatus" #estatus="ngModel"
+                                          (change)="setEstatus(estatus,i)" >                                            
+                                            <option value="1">Aprobada</option>
+                                            <option value="2">Rechazado</option>
+                                          </select>
+                                          
+                                        </div>
+                              
+                                       
+                                      </form>
+
+                                </div>
+                                
+                            </div>
+                            <div class="opciones" *ngIf="notOnlyAnalist">
+                                <label for="exampleInputPassword1">Cambiar  Estado</label>
+                                <select required class="form-control" ngModel name="estado" #estado="ngModel"
+                                          (change)="setGeneralEstatus(estado)"  >                                            
+                                            <option value="1" *ngIf="facturacion">Finalizada</option>
+                                            <option value="2" *ngIf="bodega">Producto Recibido</option>
+                                            <option value="3" *ngIf="bodega">Producto recibido con novedad</option>
+                                        
+                                </select>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Observaciones</label>
+                                <input type="text" class="form-control" placeholder="observacion" ngModel name="observacion"
+                                  #observacion="ngModel" (change)="setObservacion(observacion)" >
+                              </div>
+                              <label for="exampleInputPassword1"   >Adjuntar Archivo:</label>
+                              <br>
+                            <input type="file"   (change)="onChange($event)">
+                            <br>
+                            <button type="submit" *ngIf="checkedItems" class="btn btn-primary" (click)="onEdit()" >Actualizar</button>
+                            <button type="submit" *ngIf="checkedItems==false" class="btn btn-primary" (click)="changeStatus()">Actualizar</button>
+                            
+                 
+                       
+
+                        
+                            <div class="card">
+                                <div class="card-body">
+                                    <h1 class="titulo">Gestiones Realizadas</h1>
+                                    <div class="table-responsive">
+
+                                        <table class="table">
+                                            <thead class=" text">
+                                                <th class="consecutivo">
+                                                    Consecutivo
+                                                </th>
+                                                <th class="fecha">
+                                                    Fecha
+                                                </th>
+                                                <th>
+                                                    Observacion
+                                                </th>
+                                                <th>
+                                                    Usuario Responsable
+                                                </th>
+                                                
+
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let history of history">
+
+                                                        <td>{{history.uuid}}</td>
+                                                        <td>{{history.date}}</td>
+                                                        <td>{{history.observation}}</td>
+                                                        <td>{{history.userModified}}</td>
+<!--
+                                                        <td  *ngIf="(history.file!=null) && (history.file!='')"> <a href="data:image/x-bittorrent;base64,history.file">Abrir</a> </td>-->
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <ng-template #template>
+                                            <div class="modal-header">
+                                                <h6>Modal</h6>
+                                                <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()"></button>
+
+                                            </div>
+
+
+
+                                        </ng-template>
+                                    </div>
+                                    
+                                </div>
+
+
+
+                            </div>
+
+
+
+                       
+                        
+                   
+
+
+
+
+                </div>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+   
+   
+    
+  </div>
+
+

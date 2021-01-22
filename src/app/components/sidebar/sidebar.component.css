@@ -1,0 +1,20 @@
+.collapse.in {
+    display: block;
+}
+
+li.nav-item.open div{
+    display: block;
+}
+
+li.nav-item.closed div{
+    display: none;
+}
+
+div.content ul{
+    margin-top: 5px;
+    padding-left: 20px;
+}
+
+div.content ul .item-hijo{
+    padding-left: 10px 5px;
+}

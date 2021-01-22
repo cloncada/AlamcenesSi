@@ -1,0 +1,333 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <a [routerLink]="['/ofertas']" class="btn btn-default"><span class="btn-label"><i class="now-ui-icons arrows-1_minimal-left"></i></span> Cancelar</a>
+          <h5 class="title" style="display: inline-block; margin-left: 5px;">Procesar Oferta</h5>
+        </div>
+        <div class="card-body">
+          <form *ngIf="oferta"  #heroForm="ngForm">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label style="display: block;">Id de Motor de Oferta</label>
+                  <input type="text" name="idOferta" [disabled]="oferta.estatus == 'FINALIZADA' || oferta.estatus == 'NOTIFICADA'" [(ngModel)]="oferta.idOferta" class="form-control" style="display: inline-block;width: 65%;">
+                  <button *ngIf="oferta.estatus == 'CREADA'" [disabled]=" !habilitarProcesar || !oferta.idOferta || (oferta.idOferta != null && oferta.idOferta.length <= 0 )" type="submit" class="btn btn-success" (click)="onProcessProcesar($event)" style="display: inline-block !important;width: 30%;height: 30px;line-height: 10px;margin-left: 5px;padding: 5px 10px;">Procesar</button>
+                  <button *ngIf="oferta.estatus == 'PROCESADA'" [disabled]=" !habilitarProcesar || !oferta.idOferta || (oferta.idOferta != null && oferta.idOferta.length <= 0 )" type="submit" class="btn btn-success" (click)="onProcessEditar($event)" style="display: inline-block !important;width: 30%;height: 30px;line-height: 10px;margin-left: 5px;padding: 5px 10px;">Modificar</button>
+                </div>
+              </div>
+            </div>
+            <div class="row" *ngIf="oferta.estatus == 'FINALIZADA'">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Total ventas unidades</label>
+                  <input type="number" min="0" class="form-control" name="totalVentaUnidades" [(ngModel)]="oferta.totalVentaUnidades">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Total ventas descuentos </label>
+                  <input type="number" min="0" class="form-control" name="totalVentaDescuentos" [(ngModel)]="oferta.totalVentaDescuentos" required>
+                  
+                </div>
+              </div>
+              <div class="col-md-4">
+                <button  type="submit" class="btn btn-success" (click)="onProcessModificar($event)" style="display: inline-block !important;height: 30px;line-height: 10px;margin-left: 5px;padding: 5px 10px; margin: 25px 1px;">Modificar</button>
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Nombre del Evento</label>
+                    <input type="text" name="eventoOferta" [(ngModel)]="oferta.eventoOferta.nombre" class="form-control" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Estructura Comercial UEN</label>
+                    <input type="text" name="estructuraComercial.nombreNegocio" [(ngModel)]="oferta.estructuraComercial.nombreNegocio" class="form-control" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Departamento</label>
+                      <input type="text" name="estructuraComercial.nombredepartamento" [(ngModel)]="oferta.estructuraComercial.nombredepartamento" class="form-control" readonly>
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Grupo</label>
+                    <input type="text" name="estructuraComercial.nombreGrupo" [(ngModel)]="oferta.estructuraComercial.nombreGrupo" class="form-control" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Categoría</label>
+                    <input type="text" name="estructuraComercial.nombreCategoria" [(ngModel)]="oferta.estructuraComercial.nombreCategoria" class="form-control" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Subcategoría</label>
+                      <input type="text" name="estructuraComercial.nombreSubcategoria" [(ngModel)]="oferta.estructuraComercial.nombreSubcategoria" class="form-control" readonly>
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Marca</label>
+                    <input type="text" name="marca.nombre" [(ngModel)]="oferta.marca.nombre" class="form-control" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Total ventas unidades</label>
+                    <input type="number" min="0" class="form-control" name="totalVentaUnidades" [(ngModel)]="oferta.totalVentaUnidades" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Total ventas descuentos </label>
+                    <input type="number" min="0" class="form-control" name="totalVentaDescuentos" [(ngModel)]="oferta.totalVentaDescuentos" required readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-8">
+                  <div class="form-group">
+                    <label>Nombre de Oferta</label>
+                    <input type="text" class="form-control" [(ngModel)]="oferta.nombreOferta" name="nombreOferta" placeholder="Nombre de la Oferta" #nombreOferta="ngModel" required readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Comprador</label>
+                      <input type="text" class="form-control" [(ngModel)]="oferta.comprador.nombre" name="comprador.nombre" placeholder="Nombre de la Oferta"  required readonly>
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Fecha de Inicio</label>
+                    <input type="text" class="form-control" [(ngModel)]="oferta.fechaInicio" name="fechaInicio" required readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Fecha Fin</label>
+                      <input type="text" class="form-control" [(ngModel)]="oferta.fechaFin" name="fechaFin" required readonly>
+                    </div>
+                </div>
+               
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Medio de Pago</label>
+                      <input type="text" name="oferta.medioPago.nombre" [(ngModel)]="oferta.medioPago.nombre" class="form-control" readonly>
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                    <div class="form-check form-check-inline">
+                        <label>*Almacen(es) en donde aplica esta oferta:</label>
+                    </div>
+                </div>
+                <div *ngFor="let region of regions" class="col-md-12">
+                  <div *ngIf="region.sucursales.length">
+                    <label for="" style="font-weight: bold;">{{region.nombre | uppercase}}: </label>&nbsp;&nbsp;
+                    <!-- Default inline 1-->
+                    <div class="sucursales" style="margin-left: 3%;">
+                      <div *ngFor="let branch of region.sucursales" class="custom-control custom-checkbox custom-control-inline" style="width: 22%;">
+                        <input type="checkbox" class="custom-control-input" id="{{branch.codigo}}" checked="{{branch.check}}" (change)="onCheckboxChange(branch,$event)" required disabled>
+                        <label class="custom-control-label" for="{{branch.codigo}}">{{branch.nombre}}</label>
+                      </div>
+                    </div>
+                    
+                </div>
+                </div>
+              </div>
+              <br>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Tipo de Oferta</label>
+                    <input type="text" name="oferta.tipoOferta" class="form-control" [(ngModel)]="oferta.tipoOferta.nombre" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Valor</label>
+                    <input type="number" min="0" class="form-control" name="valorTipoOferta" [(ngModel)]="oferta.valorTipoOferta" required readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Tipo de Ventaja</label>
+                      <input type="text" name="oferta.tipoVentaja" class="form-control" [(ngModel)]="oferta.tipoVentaja.nombre" readonly>
+                    </div>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Proveedor</label>
+                    <input type="text" name="oferta.proveedor.razonSocial" class="form-control" [(ngModel)]="oferta.proveedor.razonSocial" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Forma de Pago Proveedor</label>
+                    <input type="text" name="oferta.formaPagoProveedor.nombre" class="form-control" [(ngModel)]="oferta.formaPagoProveedor.nombre" readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Cobrar a Proveedor en base a:</label>
+                    <input type="text" class="form-control" name="oferta.cobroProveedor" [(ngModel)]="oferta.cobroProveedor" readonly>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label style="display: block;">Participación para asumir</label>
+                    <input type="number" min="0" class="form-control" name="participacionAsumirNegocio" [(ngModel)]="oferta.participacionAsumirNegocio" placeholder="Almacenes Si" required readonly>
+                    <input type="number" min="0" class="form-control" name="participacionAsumirProveedor" [(ngModel)]="oferta.participacionAsumirProveedor" placeholder="Proveedor" required readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Unidades Disponibles para la Oferta</label>
+                    <input type="number" min="0" class="form-control" name="unidadesDisponibles" [(ngModel)]="oferta.unidadesDisponibles" required readonly>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <label>Plazo de crédito(Si Aplica)</label>
+                  <input type="text" name="oferta.plazoCredito.nombre" class="form-control" [(ngModel)]="oferta.plazoCredito.nombre" required readonly>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Descripción de la mecánica de la oferta(Detalles Operativos)</label>
+                    <textarea rows="4" cols="80" class="form-control" placeholder="Descripción de la mecánica de la oferta(Detalles Operativos)" [(ngModel)]="oferta.descripcionMecanicaOferta" name="descripcionMecanicaOferta" required readonly></textarea>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Obervaciones</label>
+                    <textarea rows="4" cols="80" class="form-control" placeholder="Ingrese Observaciones" [(ngModel)]="oferta.observaciones" name="observaciones" required readonly></textarea>
+                  </div>
+                </div>
+              </div>
+
+           
+                <!--
+                     <div class="row">
+                <div class="col-md-4">
+                  <label>Sugerencia Tipo de POP </label>
+                  <input type="text"  class="form-control" name="oferta.puntoCompra.nombre" [(ngModel)]="oferta.puntoCompra.nombre" readonly>
+                </div>
+                    <div class="col-md-8">
+                  <div class="form-group">
+                    <label>Texto para comunicar POP</label>
+                    <input type="text" class="form-control" name="textoPuntoCompra" [(ngModel)]="oferta.textoPuntoCompra" required readonly>
+                  </div>
+                </div>
+                   </div>
+                -->
+              
+           
+              <!--
+                  <div class="row">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label>Textos Legales</label>
+                      <textarea rows="4" cols="80" class="form-control" placeholder="Ingrese Textos legales" [(ngModel)]="oferta.textoLegal" name="textoLegal" required readonly></textarea>
+                    </div>
+                  </div>
+                 
+                </div>
+              -->
+            
+            
+            <button type="button" *ngIf="oferta.eans && oferta.eans.length" class="btn btn-success" (click)="exportData('contactJs')">Exportar EANES</button>
+            <div class="table-responsive" *ngIf="oferta.eans && oferta.eans.length">
+              
+              <table id="contactJs" class="table" >
+                <tr class="thead">
+                  <th>Ean</th>
+                  <th>Referencia</th>
+                  <th>Descripcion</th>
+                  <th>Marca</th>
+                  <th>Precio Antes</th>
+                  <th>Precio Ahora</th>
+
+                  <th style="display: none;">Capacidad Libras</th>
+                  <th style="display: none;">Medida Producto</th>
+                  <th style="display: none;">Tension Voltaje</th>
+                  <th style="display: none;">Tipo De Energia</th>
+                  <th style="display: none;">Potencia</th>
+                  <th style="display: none;">Medida Pantalla Pulg</th>
+                  <th style="display: none;">Modelo</th>
+                  <th style="display: none;">Cilindraje Cc</th>
+                  <th style="display: none;">Motor</th>
+                  <th style="display: none;">Material</th>
+                  <th style="display: none;">Tipo Equipo</th>
+                  <th style="display: none;">Autonomia</th>
+                  <th style="display: none;">Talla Medida</th>
+                  <th style="display: none;">Materiales De Elaboracion</th>
+                  <th style="display: none;">Tipo De Colchon</th>
+                  <th style="display: none;">Material De La Base</th>
+                  <th style="display: none;">Sistema Operativo</th>
+                  <th style="display: none;">Procesador Computadores</th>
+                  <th style="display: none;">Resolucion</th>
+  
+                </tr>
+ 
+                <tr class="tbody" *ngFor="let contact of oferta.eans; let odd = odd" [ngClass]="{'odd': odd}">
+                  <td>{{contact?.ean}}</td>
+                  <td>{{contact?.referencia}}</td>
+                  <td>{{contact?.descripcion}}</td>
+                  <td>{{contact?.marca}}</td>
+                  <td>{{contact?.precioAntes}}</td>
+                  <td>{{contact?.precioAhora}}</td>
+
+
+                  <td style="display: none;">{{contact?.capacidadLibras}}</td>
+                  <td style="display: none;">{{contact?.medidaProducto}}</td>
+                  <td style="display: none;">{{contact?.tensionVoltaje}}</td>
+                  <td style="display: none;">{{contact?.tipoDeEnergia}}</td>
+                  <td style="display: none;">{{contact?.potencia}}</td>
+                  <td style="display: none;">{{contact?.medidaPantallaPulg}}</td>
+                  <td style="display: none;">{{contact?.modelo}}</td>
+                  <td style="display: none;">{{contact?.cilindrajeCc}}</td>
+                  <td style="display: none;">{{contact?.motor}}</td>
+                  <td style="display: none;">{{contact?.material}}</td>
+                  <td style="display: none;">{{contact?.tipoEquipo}}</td>
+                  <td style="display: none;">{{contact?.autonomia}}</td>
+                  <td style="display: none;">{{contact?.tallaMedida}}</td>
+                  <td style="display: none;">{{contact?.materialesDeElaboracion}}</td>
+                  <td style="display: none;">{{contact?.tipoDeColchon}}</td>
+                  <td style="display: none;">{{contact?.materialDeLaBase}}</td>
+                  <td style="display: none;">{{contact?.sistemaOperativo}}</td>
+                  <td style="display: none;">{{contact?.procesadorComputadores}}</td>
+                  <td style="display: none;">{{contact?.resolucion}}</td>
+                  
+                </tr>
+              </table>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

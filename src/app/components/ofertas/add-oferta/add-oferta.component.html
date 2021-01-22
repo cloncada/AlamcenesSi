@@ -1,0 +1,418 @@
+
+
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <a [routerLink]="['/ofertas']" class="btn btn-default"><span class="btn-label"><i class="now-ui-icons arrows-1_minimal-left"></i></span> Cancelar</a>
+          <h5 style="display: inline-block; margin-left: 10px;" class="title">Creación de Oferta</h5>
+        </div>
+        <div class="card-body">
+          <form #heroForm="ngForm">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Nombre del Evento</label>
+                  
+                       <select [(ngModel)]="oferta.codigoEventoOferta" class="form-control" name="codigoEventoOferta"
+                    required>
+                    <option *ngFor="let event of eventNames" [value]="event.codigo">{{ event.nombre }}</option>
+                  </select>
+                  
+               <!--
+ <ng-select2 
+                    [(ngModel)]="oferta.codigoEventoOferta"
+                    [data]="eventNames"
+                    [placeholder]="'Please select a fruit...'"
+                    class="form-control" 
+                    name="codigoEventoOferta"
+                    required
+                    >		
+                </ng-select2>
+               -->
+                 
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Estructura Comercial UEN</label>
+                  <select class="form-control" [(ngModel)]="oferta.deal" name="codigoNegocio" (change)="onDealChange()"
+                    required>
+                    <option [ngValue]="null" disabled selected>Elige Negocio</option>
+                    <option *ngFor="let deal of commercialStructure" [ngValue]="deal">{{ deal.nombreNegocio }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Departamento</label>
+                  <select *ngIf="oferta.deal" class="form-control" [(ngModel)]="oferta.department"
+                    name="codigoDepartamento" (change)="onDepartmentChange()" required>
+                    <option [ngValue]="null" disabled selected>Elige Departamento</option>
+                    <option *ngFor="let deparment of oferta.deal.departamentos" [ngValue]="deparment">
+                      {{ deparment.nombreDepartamento }}</option>
+                  </select>
+                  <select *ngIf="oferta.deal == null" class="form-control"></select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Grupo</label>
+                  <select *ngIf="oferta.department" class="form-control" [(ngModel)]="oferta.group" name="codigoGrupo"
+                    (change)="onGroupChange()" required>
+                    <option [ngValue]="null" disabled selected>Elige Grupo</option>
+                    <option *ngFor="let group of oferta.department.grupos" [ngValue]="group">{{ group.nombreGrupo }}
+                    </option>
+                  </select>
+                  <select *ngIf="oferta.department == null" class="form-control"></select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Categoría</label>
+                  <select *ngIf="oferta.group" class="form-control" [(ngModel)]="oferta.category" name="codigoCategoria"
+                    (change)="onCategoryChange()" required>
+                    <option [ngValue]="null" disabled selected>Elige Categoría</option>
+                    <option *ngFor="let category of oferta.group.categorias" [ngValue]="category">
+                      {{ category.nombreCategoria }}</option>
+                  </select>
+                  <select *ngIf="oferta.group == null" class="form-control"></select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Subcategoría</label>
+                  <select *ngIf="oferta.category" class="form-control" [(ngModel)]="oferta.subcategory"
+                    name="codigoSubcategoria" required>
+                    <option [ngValue]="null" disabled selected>Elige Subcategoría</option>
+                    <option *ngFor="let subcategory of oferta.category.subcategorias" [ngValue]="subcategory">
+                      {{ subcategory.nombreSubcategoria }}</option>
+                  </select>
+                  <select *ngIf="oferta.category == null" class="form-control"></select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Marca</label>
+                  <select class="form-control" [(ngModel)]="oferta.codigoMarca" name="codigoMarca" required>
+                    <option *ngFor="let brand of brands" [ngValue]="brand.codigo">{{ brand.nombre }}</option>
+                  </select>
+                </div>
+              </div>
+              <!--
+                <div class="col-md-4">
+                <div class="form-group">
+                  <label>Total ventas unidades</label>
+                  <input type="number" min="0" class="form-control" name="totalVentaUnidades"
+                    [(ngModel)]="oferta.totalVentaUnidades">
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Total ventas descuentos </label>
+                  <input type="number" min="0" class="form-control" name="totalVentaDescuentos"
+                    [(ngModel)]="oferta.totalVentaDescuentos" required>
+                </div>
+              </div>
+              -->
+              
+
+            </div>
+            <div class="row">
+              <div class="col-md-8">
+                <div class="form-group">
+                  <label>Nombre de Oferta</label>
+                  <input type="text" class="form-control" [(ngModel)]="oferta.nombreOferta" name="nombreOferta"
+                    placeholder="Nombre de la Oferta" #nombreOferta="ngModel" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Comprador</label>
+                  <select class="form-control" [(ngModel)]="oferta.codigoComprador" name="codigoComprador" required>
+                    <option *ngFor="let buyer of buyers" [ngValue]="buyer.id">{{ buyer.nombre }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Fecha de Inicio</label>
+                  <input type="date" class="form-control" [(ngModel)]="oferta.fechaInicio" name="fechaInicio" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Fecha Fin</label>
+                  <input type="date" class="form-control" [(ngModel)]="oferta.fechaFin" name="fechaFin" required>
+                </div>
+              </div>
+            
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Medio de Pago</label>
+                  <select class="form-control" [(ngModel)]="oferta.codigoMedioPago" name="codigoMedioPago" required>
+                    <option *ngFor="let payment of payments" [ngValue]="payment.codigo">{{ payment.nombre }}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-check form-check-inline">
+                  <label>*Sucursal(es) en donde aplica esta oferta:</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                  <label class="form-check-label" for="radio-aplica-almacen-todos">
+                    <input class="form-check-input" type="checkbox" id="radio-aplica-almacen-todos" name="checkTodos" [(ngModel)]="checkTodos" (change)="onCheckboxChangeRegionAll($event)" >
+                    <span class="form-check-sign"></span> TODOS
+                  </label>
+                </div>
+
+
+                <div *ngFor="let region of regions" style="display: inline-block;">
+                  <div *ngIf="region.sucursales.length" class="form-check form-check-inline">
+                    <label class="form-check-label" for="{{region.codigo}}">
+                      <input class="form-check-input" type="checkbox" id="{{region.codigo}}" [(checked)]="region.check" (change)="onCheckboxChangeRegion(region.codigo,$event)" >
+                      <span class="form-check-sign"></span> {{region.nombre}}
+                    </label>
+                  </div>
+                </div>
+                
+                <div class="form-check form-check-inline">
+                  <button type="button" class="btn btn-default btn-sm" (click)="onClearRegions()"><i class="now-ui-icons ui-1_simple-remove"></i> Limpiar</button>
+                </div>
+               
+
+              </div>
+              <div *ngFor="let region of regions" class="col-md-12">
+                <div *ngIf="region.sucursales.length">
+                  <label for="" style="font-weight: bold;">{{region.nombre | uppercase}}: </label>&nbsp;&nbsp;
+                  <!-- Default inline 1-->
+                  <div style="margin-left: 3%;">
+                    <div *ngFor="let branch of region.sucursales"
+                    class="custom-control custom-checkbox custom-control-inline" style="width: 22%;">
+                    <input type="checkbox" class="custom-control-input" id="{{branch.codigo}}" [checked]="branch.check"
+                      (change)="onCheckboxChange(branch,$event)" required>
+                    <label class="custom-control-label" for="{{branch.codigo}}">{{branch.nombre}}</label>
+                  </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Tipo de Oferta</label>
+                  <select class="form-control" [(ngModel)]="oferta.codigoTipoOferta" name="codigoTipoOferta" required>
+                    <option *ngFor="let ofertType of ofertsType" [ngValue]="ofertType.codigo">{{ ofertType.nombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Valor</label>
+                  <input type="number" min="0" class="form-control" name="valorTipoOferta"
+                    [(ngModel)]="oferta.valorTipoOferta" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Tipo de Ventaja</label>
+                  <select class="form-control" [(ngModel)]="oferta.tipoVentaja" name="tipoVentaja" required>
+                    <option *ngFor="let advantageType of advantagesType" [ngValue]="advantageType.codigo">{{ advantageType.nombre }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Proveedor</label>
+                  <select class="form-control" [(ngModel)]="oferta.codigoProveedor" name="codigoProveedor" required>
+                    <option *ngFor="let provider of providers" [ngValue]="provider.codigo">{{ provider.razonSocial }}
+                    </option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Forma de Pago Proveedor</label>
+                  <select class="form-control" [(ngModel)]="oferta.codigoFormaPagoProveedor"
+                    name="codigoFormaPagoProveedor" required>
+                    <option *ngFor="let providerPayment of providerPayments" [ngValue]="providerPayment.codigo">
+                      {{ providerPayment.nombre }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div style="display: block;" class="form-check form-check-inline">
+                  <label>Cobrar a Proveedor en base a:</label>
+                </div>
+                <!-- Material inline 1 -->
+                
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" name="cobroProveedor"
+                    id="radio-cobro-aplica-proveedor-costo" [(ngModel)]="oferta.cobroProveedor" value="costo" required>
+                  <label style="padding-left: 5px;" class="form-check-label" for="radio-cobro-aplica-proveedor-costo">Costo</label>
+                </div>
+
+                <!-- Material inline 2 -->
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" name="cobroProveedor"
+                    id="radio-cobro-aplica-proveedor-pvp" [(ngModel)]="oferta.cobroProveedor" value="pvp">
+                  <label style="padding-left: 5px;"  class="form-check-label" for="radio-cobro-aplica-proveedor-pvp">PVP</label>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label style="display: block;">Participación para asumir</label>
+                  <input type="number" min="0" class="form-control" name="participacionAsumirNegocio"
+                    [(ngModel)]="oferta.participacionAsumirNegocio" placeholder="Almacenes Si" required>
+                  <input type="number" min="0" class="form-control" name="participacionAsumirProveedor"
+                    [(ngModel)]="oferta.participacionAsumirProveedor" placeholder="Proveedor" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Unidades Disponibles para la Oferta</label>
+                  <input type="number" min="0" class="form-control" name="unidadesDisponibles"
+                    [(ngModel)]="oferta.unidadesDisponibles" required>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label>Plazo de crédito(Si Aplica)</label>
+                <select class="form-control" [(ngModel)]="oferta.codigoPlazoCredito" name="codigoPlazoCredito" required>
+                  <option *ngFor="let creditTerm of creditTerms" [ngValue]="creditTerm.codigo">{{ creditTerm.nombre }}
+                  </option>
+                </select>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Descripción de la mecánica de la oferta(Detalles Operativos)</label>
+                  <textarea rows="4" cols="80" class="form-control"
+                    placeholder="Descripción de la mecánica de la oferta(Detalles Operativos)"
+                    [(ngModel)]="oferta.descripcionMecanicaOferta" name="descripcionMecanicaOferta" required></textarea>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Obervaciones</label>
+                  <textarea rows="4" cols="80" class="form-control" placeholder="Ingrese Observaciones"
+                    [(ngModel)]="oferta.observaciones" name="observaciones" required></textarea>
+                </div>
+              </div>
+            </div>
+  <!--
+            <div class="row">
+              <div class="col-md-4">
+                <label>Sugerencia Tipo de POP </label>
+                <select class="form-control" [(ngModel)]="oferta.codigoTipoPuntoCompra" name="codigoTipoPuntoCompra"
+                  required>
+                  <option *ngFor="let pop of pops" [ngValue]="pop.codigo">{{ pop.nombre }}</option>
+                </select>
+              </div>
+            
+               <div class="col-md-8">
+                <div class="form-group">
+                  <label>Texto para comunicar POP</label>
+                  <textarea rows="4" cols="80" class="form-control"
+                    placeholder="Texto para comunicar POP"
+                    [(ngModel)]="oferta.textoPuntoCompra" name="textoPuntoCompra" required></textarea>
+                </div>
+              </div>
+
+             
+             
+
+            </div>
+             -->
+            <!--
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Textos Legales</label>
+                  <textarea rows="4" cols="80" class="form-control" placeholder="Ingrese Textos legales"
+                    [(ngModel)]="oferta.textoLegal" name="textoLegal" required></textarea>
+                </div>
+              </div>
+              
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Obervaciones</label>
+                  <textarea rows="4" cols="80" class="form-control" placeholder="Ingrese Observaciones"
+                    [(ngModel)]="oferta.observaciones" name="observaciones" required></textarea>
+                </div>
+              </div>
+            </div>
+            -->
+          
+            <div class="form-group">
+              <label>Sección de EANES</label>
+              <div class="custom-file">
+                <input type="file" class="custom-file-input" #fileUploader id="inputGroupFile01"
+                  aria-describedby="inputGroupFileAddon01" (change)="onFileChange($event)" required multiple="false"
+                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                <label class="custom-file-label" for="inputGroupFile01">Importar Excel Eanes</label>
+              </div>
+            </div>
+            <!--*ngIf="oferta.eans && oferta.eans.length"-->
+            <div class="table-responsive" >
+              <table id="contactJs" style="text-align: center;" class="table">
+                <tr class="thead">
+                  <th>Ean</th>
+                  <th>Referencia</th>
+                  <th>Descripcion</th>
+                  <th>Marca</th>
+                  <th>Precio Antes</th>
+                  <th>Precio Ahora</th>
+                  <th></th>
+                </tr>
+
+                <tr class="tbody" *ngFor="let contact of oferta.eans; let odd = odd" [ngClass]="{'odd': odd}">
+
+                  <td>{{contact?.ean}}</td>
+                  <td>{{contact?.referencia}}</td>
+                  <td>{{contact?.descripcion}}</td>
+                  <td>{{contact?.marca}}</td>
+                  <td>{{contact?.precioAntes}}</td>
+                  <td>{{contact?.precioAhora}}</td>
+                  <td><button (click)="onDeleteEan(contact.referencia);" class="btn btn-link btn-danger" href=""><i class="now-ui-icons ui-1_simple-remove"></i></button></td>
+                </tr>
+              </table>
+            </div>
+
+
+            <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid" (click)="onSubmit($event)">Guardar</button>
+            <button type="button" class="btn btn-default" (click)="newHero();">Limpiar</button>
+            <!--heroForm.reset()-->
+          </form>
+          <!--
+          <select2 [data]="data"
+          [value]="value"
+          (update)="update($event)">
+      </select2>-->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

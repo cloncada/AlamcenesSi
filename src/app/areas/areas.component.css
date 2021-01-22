@@ -1,0 +1,35 @@
+
+.aprobada{
+color:#00f200;
+
+
+}
+.cancelado{
+
+    color:	#f90000;
+
+}
+.finalizada{
+    color:	#2d751c;
+
+
+}
+.creada{
+
+    color:  #06f0f0;
+
+}
+.recibido{
+
+    color: #e57e0e;
+
+}
+.novedad{
+
+
+    color: #f404b6;
+}
+.espera{
+color:#ff00d4;
+
+}
